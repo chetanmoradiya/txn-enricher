@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 @Service
@@ -22,7 +23,11 @@ public class InstrumentDataService {
         log.info("In getInstrumentData");
         List<String> securityIdentifier = transactionReports.stream().map(i -> i.getSecIdentifier()).distinct().collect(
                 Collectors.toList());
-        Map<String,InstrumentData> instrumentDataMap=instrumentDataRepository.findInstrumentDataBySecurityIdentifier(securityIdentifier);
+        List<InstrumentData> instrumentData=instrumentDataRepository.findBySecIdentifierIn(securityIdentifier);
+
+        Map<String, InstrumentData> instrumentDataMap = instrumentData.stream()
+                .collect(Collectors.toMap(InstrumentData::getSecIdentifier, Function.identity()));
+
         log.info("Out getInstrumentData {}", instrumentDataMap.size());
         return instrumentDataMap;
     }

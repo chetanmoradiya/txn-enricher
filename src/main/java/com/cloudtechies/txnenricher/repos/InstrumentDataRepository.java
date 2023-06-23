@@ -10,6 +10,5 @@ import java.util.Map;
 
 public interface InstrumentDataRepository extends JpaRepository<InstrumentData, String> {
 
-	@Query(value="select distinct sec_identifier, * from instrument_data where sec_identifier IN :securityIdentifier", nativeQuery = true)
-    Map<String,InstrumentData> findInstrumentDataBySecurityIdentifier(@Param("securityIdentifier") List<String> securityIdentifier);
+    List<InstrumentData> findBySecIdentifierIn(@Param("secIdentifier") List<String> secIdentifier);
 }

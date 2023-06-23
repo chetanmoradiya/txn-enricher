@@ -9,6 +9,8 @@ import com.cloudtechies.txnenricher.service.TransactionDataService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaListener;
+import org.springframework.kafka.support.KafkaHeaders;
+import org.springframework.messaging.handler.annotation.Header;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Service;
 
@@ -31,10 +33,11 @@ public class EnrichDataTopicListener
     @Autowired
     KafkaOutputAdapter kafkaOutputAdapter;
 
-    @KafkaListener(topics = "#{transactionEnricherProperties.kafkaEnrichTxnOutputTopic}",
+    @KafkaListener(topics = "#{transactionEnricherProperties.kafkaEnrichTxnInputTopic}",
                    groupId = "#{transactionEnricherProperties.kafkaConsumerGroupName}",
                    concurrency = "1")
-    public void handleTxnInputEvent(@Payload List<String> messages){
+    public void handleTxnInputEvent(@Payload List<String> messages,
+                                    @Header(KafkaHeaders.BATCH_CONVERTED_HEADERS) List<Map<String,?>> batchConverterHeaders){
         log.info("message received:{}",messages.size());
 
         List<TransactionReport> transactionReports= transactionDataService.getTransactionReportList(messages);

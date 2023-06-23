@@ -7,6 +7,7 @@ import com.cloudtechies.txnenricher.model.TransactionReport;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.time.Instant;
 import java.util.List;
 import java.util.Map;
 
@@ -46,6 +47,7 @@ public class DataEnrichmentService {
                     transactionReport.setLoanJurisOfIssuer(instrumentData.getLoanJurisOfIssuer());
                 }
                 transactionReport.setTxnStatus(TransactionStatus.ACPT);
+                transactionReport.setUpdateTs(Instant.now());
             }else{
                 String error="securityIdentifier does not exist in instrument data "+ securityIdentifier;
                 log.error(error);
