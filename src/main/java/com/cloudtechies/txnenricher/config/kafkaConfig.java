@@ -64,6 +64,6 @@ public class kafkaConfig {
 
     @Bean
     public NewTopic txnDataInput(){
-        return TopicBuilder.name(transactionEnricherProperties.getKafkaEnrichTxnOutputTopic()).build();
+        return TopicBuilder.name(transactionEnricherProperties.getKafkaEnrichTxnInputTopic()).build();
     }
 }

@@ -1,22 +1,23 @@
 server:
-  port: 8082
+  port: 8083
 
 spring:
   datasource:
     username: postgres
-    password: postgres
     url: jdbc:postgresql://localhost:5432/hackathon
-    jpa:
-      database-platform: org.hibernate.dialect.PostgreSQLDialect
-  driver-class-name: org.postgresql.Driver
+    password: admin
+    hikari:
+      schema: cloudtechies
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
   liquibase:
     change-log: classpath:db/changelog/db.changelog-master.yaml
 
 txn:
   enricher:
     kafkaClusterURL: localhost:9092
-    kafkaEnrichTxnInputTopic: enrich-txn-input
-    kafkaEnrichTxnOutputTopic: enrich-txn-output
+    kafkaEnrichTxnInputTopic: prenrvalid-txn-data-output
+    kafkaEnrichTxnOutputTopic: downstream-topic
     kafkaConsumerGroupName: txn-enricher
     restRetryCount: 5
     restBackoffTime: 100
