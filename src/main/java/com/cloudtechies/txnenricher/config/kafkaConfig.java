@@ -62,8 +62,8 @@ public class kafkaConfig {
         return new KafkaTemplate<>(producerFactory());
     }
 
-//    @Bean
-//    public NewTopic txnDataInput(){
-//        return TopicBuilder.name(transactionEnricherProperties.getKafkaEnrichTxnInputTopic()).build();
-//    }
+    @Bean
+    public NewTopic txnDataInput(){
+        return TopicBuilder.name(transactionEnricherProperties.getKafkaEnrichTxnOutputTopic()).build();
+    }
 }
