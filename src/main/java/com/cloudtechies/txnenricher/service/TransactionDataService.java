@@ -21,7 +21,7 @@ public class TransactionDataService {
     TransactionReportRepository transactionReportRepository;
 
     public List<TransactionReport> getTransactionReportList(List<String> messages) {
-        log.info("In getTransactionReportList");
+        log.debug("In getTransactionReportList");
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.registerModule(new JavaTimeModule());
         List<TransactionReport> transactionReports = new ArrayList<>();
@@ -35,13 +35,13 @@ public class TransactionDataService {
             }
             transactionReports.add(transactionReport);
         }
-        log.info("Out getTransactionReportList");
+        log.debug("Out getTransactionReportList");
         return transactionReports;
     }
 
     public void updateTransactionData(List<TransactionReport> transactionReports) {
-        log.info("In updateTransactionData");
+        log.debug("In updateTransactionData");
         transactionReportRepository.saveAll(transactionReports);
-        log.info("In updateTransactionData");
+        log.debug("In updateTransactionData");
     }
 }

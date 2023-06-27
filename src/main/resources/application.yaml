@@ -10,8 +10,6 @@ spring:
 #      schema: cloudtechies
   jpa:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
-  liquibase:
-    change-log: classpath:db/changelog/db.changelog-master.yaml
 
 txn:
   enricher:
@@ -21,5 +19,5 @@ txn:
     kafkaConsumerGroupName: txn-enricher
     restRetryCount: 5
     restBackoffTime: 100
-    maxPollSize: 3
+    maxPollSize: 500
 

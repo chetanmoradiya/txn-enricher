@@ -16,7 +16,7 @@ import java.util.Map;
 public class DataEnrichmentService {
 
     public void enrichTransactionData(List<TransactionReport> transactionReports, Map<String, InstrumentData> instrumentDataMap) {
-        log.info("In enrichTransactionData");
+        log.debug("In enrichTransactionData");
         for(TransactionReport transactionReport:transactionReports){
             String securityIdentifier=transactionReport.getSecIdentifier();
             if(instrumentDataMap.containsKey(securityIdentifier)){
@@ -54,6 +54,6 @@ public class DataEnrichmentService {
                 throw new UnrecoverableException(error);
             }
         }
-        log.info("Out enrichTransactionData");
+        log.debug("Out enrichTransactionData");
     }
 }

@@ -20,7 +20,7 @@ public class InstrumentDataService {
     InstrumentDataRepository instrumentDataRepository;
 
     public Map<String,InstrumentData> getInstrumentData(List<TransactionReport> transactionReports) {
-        log.info("In getInstrumentData");
+        log.debug("In getInstrumentData");
         List<String> securityIdentifier = transactionReports.stream().map(i -> i.getSecIdentifier()).distinct().collect(
                 Collectors.toList());
         List<InstrumentData> instrumentData=instrumentDataRepository.findBySecIdentifierIn(securityIdentifier);
@@ -28,7 +28,7 @@ public class InstrumentDataService {
         Map<String, InstrumentData> instrumentDataMap = instrumentData.stream()
                 .collect(Collectors.toMap(InstrumentData::getSecIdentifier, Function.identity()));
 
-        log.info("Out getInstrumentData {}", instrumentDataMap.size());
+        log.debug("Out getInstrumentData {}", instrumentDataMap.size());
         return instrumentDataMap;
     }
 }

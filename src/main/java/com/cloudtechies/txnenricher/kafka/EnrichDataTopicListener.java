@@ -45,6 +45,6 @@ public class EnrichDataTopicListener
         dataEnrichmentService.enrichTransactionData(transactionReports,instrumentDataMap);
         transactionDataService.updateTransactionData(transactionReports);
         kafkaOutputAdapter.sendMsgToKafka(transactionReports);
-        log.info("Out handleTxnInputEvent");
+        log.debug("Out handleTxnInputEvent");
     }
 }

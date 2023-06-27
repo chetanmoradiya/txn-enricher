@@ -1,6 +1,0 @@
-databaseChangeLog:
-  - include:
-      id: changelog-1-pre
-      author: cloudtechies
-      file: sql/create-statment-enricher.sql
-      relativeToChangelogFile: true

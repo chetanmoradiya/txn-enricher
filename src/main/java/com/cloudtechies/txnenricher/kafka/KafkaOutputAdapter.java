@@ -25,14 +25,14 @@ public class KafkaOutputAdapter {
 
 
     public void sendMsgToKafka(List<TransactionReport> transactionReports) {
-        log.info("In sendMsgToKafka");
+        log.debug("In sendMsgToKafka");
         ObjectMapper objectMapper=new ObjectMapper();
         objectMapper.registerModule(new JavaTimeModule());
         for(TransactionReport transactionReport:transactionReports){
             String msg=getSerializeMessage(transactionReport,objectMapper);
             kafkaProducer.send(transactionEnricherProperties.getKafkaEnrichTxnOutputTopic(),msg,new HashMap<>());
         }
-        log.info("Out sendMsgToKafka");
+        log.debug("Out sendMsgToKafka");
     }
 
     private String getSerializeMessage(TransactionReport transactionReport, ObjectMapper objectMapper) {
